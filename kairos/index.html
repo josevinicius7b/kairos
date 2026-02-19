@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KAIROS: Relíquia de Sangue – Conceito de jogo indie de mistério e exploração em floresta amaldiçoada. Narrativa ambiental, atmosfera densa. Em desenvolvimento inicial.">
+    <title>KAIROS: Relíquia de Sangue – Conceito Inicial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --crimson: #7b0000;
+            --gold: #c5a059;
+            --deep-black: #080808;
+            --parchment: #e2d1b3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--deep-black);
+            color: var(--parchment);
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: -1;
+        }
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: clamp(12px, 3vw, 20px) 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+            backdrop-filter: blur(8px);
+        }
+        .logo { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(1.1rem, 4.5vw, 1.8rem); 
+            letter-spacing: 3px; 
+            color: var(--gold); 
+            font-weight: 900; 
+            white-space: nowrap;
+        }
+        .nav-links { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: flex-end; 
+            gap: clamp(12px, 2.5vw, 20px); 
+        }
+        .nav-links a {
+            color: #eee; 
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif; 
+            font-size: clamp(0.75rem, 2.1vw, 0.9rem); 
+            letter-spacing: 1.5px;
+            transition: 0.4s; 
+            opacity: 0.85;
+        }
+        .nav-links a:hover { 
+            opacity: 1; 
+            color: var(--gold); 
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.75), var(--deep-black)),
+                        url('https://i.guim.co.uk/img/media/acf16f2ad5ce8234e20b1865be06a331401bd44f/0_228_5472_3283/master/5472.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=3487f7db6c8e28975c8ee0b3d96bb2e6') center/cover no-repeat fixed;
+            text-align: center;
+            padding: clamp(80px, 12vw, 140px) 5% clamp(60px, 10vw, 100px);
+        }
+        .hero-title { 
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(2.8rem, 11vw, 7.5rem); 
+            line-height: 0.92; 
+            margin-bottom: 0.4rem; 
+            color: #fff; 
+            text-shadow: 0 4px 25px rgba(0,0,0,0.85);
+        }
+        .hero-gold { 
+            color: var(--gold); 
+            font-size: clamp(2rem, 9vw, 5.5rem); 
+        }
+        .hero-subtitle { 
+            font-family: 'Montserrat'; 
+            font-weight: 400; 
+            letter-spacing: 5px; 
+            color: var(--gold); 
+            display: block; 
+            margin: clamp(1.2rem, 4vw, 2rem) 0; 
+            font-size: clamp(0.85rem, 3.5vw, 1.25rem); 
+            text-transform: uppercase; 
+        }
+        .hero-warning { 
+            background: rgba(123,0,0,0.4); 
+            border: 2px solid var(--crimson); 
+            color: #ffcccc; 
+            padding: clamp(14px, 4vw, 24px) clamp(18px, 5vw, 38px); 
+            margin: clamp(1.5rem, 5vw, 2.5rem) auto; 
+            max-width: 92%; 
+            font-size: clamp(0.95rem, 3vw, 1.15rem); 
+            font-family: 'Montserrat'; 
+            border-radius: 4px; 
+            line-height: 1.5;
+        }
+        .section-padding { padding: clamp(60px, 10vw, 110px) 5%; }
+        .story-section, .experience-section, .features-section {
+            background: rgba(8,8,8,0.65);
+            padding: clamp(60px, 10vw, 110px) 5%;
+            text-align: center;
+        }
+        .story-section h2, .experience-section h2, .features-section h2 {
+            font-family: 'Cinzel'; 
+            color: var(--gold); 
+            font-size: clamp(2rem, 6vw, 3.4rem); 
+            margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+        }
+        .story-text, .experience-text {
+            max-width: 920px; 
+            margin: 0 auto 2.5rem; 
+            font-size: clamp(1.05rem, 2.4vw, 1.25rem); 
+            line-height: 1.75; 
+            opacity: 0.92;
+        }
+        .tech-specs {
+            background: rgba(197,160,89,0.04);
+            border: 1px solid rgba(197,160,89,0.14);
+            padding: clamp(30px, 6vw, 50px);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: clamp(20px, 4vw, 40px);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .spec-item {
+            text-align: center;
+        }
+        .spec-item span {
+            display: block;
+            font-family: 'Montserrat';
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .spec-item strong {
+            font-family: 'Cinzel';
+            font-size: clamp(1.1rem, 3vw, 1.35rem);
+            color: #fff;
+            line-height: 1.45;
+        }
+        .trailer-section { 
+            background: #000; 
+            text-align: center; 
+            padding: clamp(50px, 10vw, 100px) 5%; 
+        }
+        .video-wrapper {
+            max-width: 1200px; 
+            margin: clamp(30px, 6vw, 60px) auto;
+            border: 2px solid rgba(197,160,89,0.25); 
+            padding: clamp(8px, 2vw, 14px);
+            background: #0a0a0a;
+        }
+        iframe { 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            border: none; 
+            display: block;
+        }
+        .warning-banner {
+            background: rgba(197,160,89,0.08);
+            border-left: 6px solid var(--gold);
+            padding: clamp(20px, 5vw, 35px);
+            margin: clamp(30px, 6vw, 60px) auto;
+            max-width: 1000px;
+            font-size: clamp(1rem, 2.4vw, 1.15rem);
+            line-height: 1.65;
+        }
+        .warning-banner strong { color: var(--gold); }
+        footer {
+            padding: clamp(60px, 12vw, 100px) 5% 50px;
+            text-align: center;
+            border-top: 1px solid rgba(197,160,89,0.1);
+            background: #030303;
+        }
+        .footer-logo { 
+            font-family: 'Cinzel'; 
+            color: var(--gold); 
+            font-size: clamp(1.3rem, 4.5vw, 1.8rem); 
+            letter-spacing: 3px; 
+            margin: 1.5rem 0 1rem; 
+        }
+        .footer-info { 
+            font-family: 'Montserrat'; 
+            font-size: clamp(0.7rem, 2.2vw, 0.85rem); 
+            opacity: 0.5; 
+            letter-spacing: 1.2px; 
+            line-height: 1.8; 
+        }
+
+        /* Animação de reveal */
+        [data-reveal] { opacity: 0; transform: translateY(50px); transition: 1.1s ease-out; }
+        .revealed { opacity: 1; transform: translateY(0); }
+
+        /* ────────────────────────────────────────────────
+           RESPONSIVIDADE – ajustes finos e mais naturais
+        ──────────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .nav-links { gap: 1.2rem; }
+            .hero { padding-top: 100px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { 
+                flex-direction: column; 
+                gap: 12px; 
+                padding: clamp(14px, 3vw, 18px) 5%; 
+            }
+            .nav-links { 
+                justify-content: center; 
+                width: 100%; 
+                margin-top: 8px; 
+            }
+            .tech-specs { grid-template-columns: 1fr; }
+            .hero-title { font-size: clamp(2.4rem, 10vw, 5.5rem); }
+            .hero-gold  { font-size: clamp(1.8rem, 8vw, 4.2rem); }
+        }
+
+        @media (max-width: 480px) {
+            .hero { 
+                min-height: 85vh; 
+                padding: clamp(90px, 18vw, 130px) 4% clamp(50px, 12vw, 90px); 
+            }
+            .hero-title { font-size: clamp(2rem, 11vw, 4.8rem); }
+            .hero-gold  { font-size: clamp(1.5rem, 9vw, 3.8rem); }
+            .hero-subtitle { letter-spacing: 3px; font-size: clamp(0.8rem, 3.8vw, 1rem); }
+            .hero-warning { padding: 14px 18px; font-size: 0.96rem; }
+            .story-text, .experience-text { font-size: clamp(1rem, 3.2vw, 1.12rem); line-height: 1.65; }
+            .warning-banner { padding: 16px 20px; font-size: 0.98rem; }
+            .nav-links a { font-size: clamp(0.8rem, 3.5vw, 1rem); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">KAIROS: RELÍQUIA DE SANGUE</div>
+        <div class="nav-links">
+            <a href="#trailer">Trailer</a>
+            <a href="#heranca">A Historia</a>
+            <a href="#experiencia">Experiência</a>
+            <a href="#caracteristicas">Características</a>
+            <a href="#aviso">Aviso</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <h1 class="hero-title">KAIROS</h1>
+            <h1 class="hero-title hero-gold">RELÍQUIA DE SANGUE</h1>
+            <span class="hero-subtitle">CONCEITO INICIAL – EM DESENVOLVIMENTO MUITO INICIAL</span>
+            <div class="hero-warning">
+                Conceito técnico muito inicial. Foco em atmosfera densa em floresta amaldiçoada. Não é uma demo jogável completa ainda.
+            </div>
+        </div>
+    </section>
+
+    <section id="trailer" class="trailer-section" data-reveal>
+        <h2>TRAILER CONCEITUAL</h2>
+        <p>Visualiza a atmosfera de floresta densa, mistério e legado que queremos capturar</p>
+        <div class="video-wrapper">
+            <!-- Corrigido: troque por link real do YouTube/Vimeo ou mantenha como placeholder -->
+            <iframe src="trailler.mp4" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- O restante do HTML permanece **idêntico** ao seu original -->
+
+    <section id="heranca" class="story-section" data-reveal>
+        <h2>A herança do desconhecido</h2>
+        <div class="story-text">
+            <p>Tudo começa com um diário deixado por um explorador que dedicou a vida a decifrar um símbolo antigo — uma marca ligada a artefatos esquecidos e a uma civilização que desapareceu tentando proteger um segredo.</p>
+            <p>Ao herdar esse registro, a protagonista percebe que aquelas páginas não contam apenas memórias… elas formam um mapa. Cada anotação revela pistas e fragmentos de uma verdade enterrada pelo tempo.</p>
+            <p>Guiada por essas marcas, ela atravessa o oceano em busca de respostas, explorando ruínas e vestígios de um passado que insiste em permanecer oculto. Quanto mais avança, mais claro se torna que essa jornada não é apenas sobre o que foi perdido — mas sobre aquilo que ainda aguarda ser descoberto.</p>
+        </div>
+    </section>
+
+    <section id="experiencia" class="experience-section" data-reveal>
+        <h2>Experiência de jogo</h2>
+        <div class="experience-text">
+            <p>Uma aventura narrativa focada em exploração, atmosfera e descoberta. O jogador percorre ambientes detalhados, investiga artefatos e reconstrói eventos do passado através de registros e pistas espalhadas pelo mundo.</p>
+            <p>O design privilegia imersão, ritmo contemplativo e tensão crescente, criando uma experiência que mistura mistério, legado e investigação ambiental.</p>
+            <p>Ideal para jogadores que buscam narrativa envolvente, exploração significativa e construção de mundo rica em detalhes.</p>
+        </div>
+    </section>
+
+    <section id="caracteristicas" class="features-section" data-reveal>
+        <h2>Características do Conceito</h2>
+        <div class="tech-specs">
+            <div class="spec-item"><span>Expectativa para o Game</span><strong>Em desenvolvimento inicial – Foco em atmosfera e narrativa</strong></div>
+            <div class="spec-item"><span>Jogadores</span><strong>1 Jogador (Single-player)</strong></div>
+            <div class="spec-item"><span>Gênero</span><strong>Mistério • Exploração • Narrativa Ambiental</strong></div>
+            <div class="spec-item"><span>Perspectiva</span><strong>Primeira e Terceira Pessoa (planejada)</strong></div>
+            <div class="spec-item"><span>Escopo Atual</span><strong>Mapa conceitual ~500m² denso (atmosfera em floresta)</strong></div>
+            <div class="spec-item"><span>Plataformas futuras</span><strong>PC (em planejamento) – Conceito inicial</strong></div>
+            <div class="spec-item"><span>Mobile</span><strong>Não planejado no momento</strong></div>
+            <div class="spec-item"><span>Estágio</span><strong>Conceito / Alpha Técnica 0.1 – Muito Inicial</strong></div>
+        </div>
+    </section>
+
+    <section id="aviso" class="section-padding" data-reveal>
+        <div class="warning-banner">
+            <strong>Aviso importante sobre o estágio atual:</strong><br><br>
+            KAIROS: Relíquia de Sangue está em fase <strong>muito inicial de conceito</strong>. Tudo é protótipo e ideia — mapa pequeno conceitual para testar atmosfera e narrativa.<br><br>
+            Isso <strong>não</strong> é o jogo final nem uma demo jogável. Estamos coletando ideias e feedback para evoluir o projeto com foco em qualidade.
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">KAIROS: RELÍQUIA DE SANGUE – Conceito Inicial</div>
+        <div class="footer-info">
+            © 2026 KAIROS STUDIO | TODOS OS DIREITOS RESERVADOS<br>
+            Projeto em fase muito inicial – transparência total.
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('revealed');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
